@@ -8,28 +8,37 @@
 
 #import "AddDogViewController.h"
 
-@interface AddDogViewController ()
+@interface AddDogViewController () <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *breedTextField;
+@property (weak, nonatomic) IBOutlet UITextField *colorTextField;
 
 @end
 
 @implementation AddDogViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+//TODO: UPDATE CODE ACCORIDNGLY
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.title = @"Add Dog";
-
 }
 
+-(Dog *)addDog;
+{
+    Dog *dog = [NSEntityDescription insertNewObjectForEntityForName:@"Dog" inManagedObjectContext:self.owner.managedObjectContext];
+    dog.name = self.nameTextField.text;
+    dog.color = self.colorTextField.text;
+    dog.breed = self.breedTextField.text;
+    return dog;
+}
+
+- (IBAction)onPressedUpdateDog:(UIButton *)sender
+{
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
